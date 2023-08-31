@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import ExtendedUserCreationForm
 
+
 def login_view(request):
     redirect_url = reverse('main_page')
     if request.method == 'GET':
