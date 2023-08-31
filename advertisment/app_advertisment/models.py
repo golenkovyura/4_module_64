@@ -4,6 +4,8 @@ from django.utils.html import format_html
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 
+from django.urls import reverse
+
 
 User = get_user_model()
 
@@ -17,6 +19,9 @@ class Advertisement(models.Model):
     updated_at = models.DateTimeField('Дата и время изменения', auto_now=True)
     user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
     image = models.ImageField('Изображение', upload_to='advertisements/', null=True, blank=True)
+
+    def get_absolute_url(self):
+        return reverse('adv_detail', kwargs={'pk': self.pk})
 
     @admin.display(description='Дата создания')
     def created_date(self):
